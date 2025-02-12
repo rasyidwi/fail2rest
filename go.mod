@@ -1,10 +1,10 @@
-module github.com/sean-der/fail2rest
+module github.com/rasyidwi/fail2rest
 
 go 1.19
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/sean-der/fail2go v0.0.1
+	github.com/rasyidwi/fail2go v0.0.1
 	github.com/sean-der/goWHOIS v0.0.0-20140709054325-70c302b526cf
 )
 

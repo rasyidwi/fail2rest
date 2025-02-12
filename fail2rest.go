@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/sean-der/fail2go"
+	"github.com/rasyidwi/fail2go"
 )
 
 type Configuration struct {
