@@ -15,8 +15,8 @@ Some libraries currently are not building on older versions of Go, I recommend r
 ## Installing
 Once you have a working Golang installation all you need to do is run
 
-    go get -v github.com/sean-der/fail2rest
-    go install -v github.com/sean-der/fail2rest
+    go get -v github.com/rasyidwi/fail2rest
+    go install -v github.com/rasyidwi/fail2rest
 
 fail2rest will now be available as a binary in your GOPATH, you can run 'fail2rest' from the command line, or copy it
 somewhere else to make it available to all users.
@@ -35,7 +35,7 @@ fail2rest has two options that be configured via config.json
 The default configuration file used by init-scripts is `/etc/fail2rest.json`. You should download the config to your /tmp/ dir and modify it to your needs.
 
     cd /tmp/
-    wget https://raw.githubusercontent.com/sean-der/fail2rest/master/config.json
+    wget https://raw.githubusercontent.com/rasyidwi/fail2rest/master/config.json
 
 Once you finished editing the configuration file, you should move it from /tmp/config.json to /etc/fail2rest.json executing `mv /tmp/config.json /etc/fail2rest.json`
 
