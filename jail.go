@@ -3,17 +3,21 @@ package main
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
 	"regexp"
 	"strings"
 
-	"github.com/gorilla/mux"
 	"github.com/rasyidwi/fail2go"
+
+	"github.com/gorilla/mux"
 )
 
 func jailGetHandler(res http.ResponseWriter, req *http.Request, fail2goConn *fail2go.Conn) {
 	currentlyFailed, totalFailed, fileList, currentlyBanned, totalBanned, IPList, err := fail2goConn.JailStatus(mux.Vars(req)["jail"])
+	fmt.Println(fail2goConn.JailStatus(mux.Vars(req)["jail"]))
+
 	if err != nil {
 		writeHTTPError(res, err)
 		return

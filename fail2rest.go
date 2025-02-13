@@ -7,8 +7,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gorilla/mux"
 	"github.com/rasyidwi/fail2go"
+
+	"github.com/gorilla/mux"
 )
 
 type Configuration struct {
