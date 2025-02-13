@@ -6,5 +6,7 @@ github.com/mattn/go-sqlite3 v1.14.22 h1:2gZY6PC6kBnID23Tichd1K+Z0oS6nE/XwU+Vz/5o
 github.com/mattn/go-sqlite3 v1.14.22/go.mod h1:Uh1q+B4BYcTPb+yiD3kU8Ct7aC0hY9fxUwlHK0RXw+Y=
 github.com/rasyidwi/fail2go v0.0.4-0.20250213023728-f85383b4a914 h1:2+yzf6arPOv/15QqIItJRz3kYxQ3GwFLzJP2k5IOPOc=
 github.com/rasyidwi/fail2go v0.0.4-0.20250213023728-f85383b4a914/go.mod h1:Nth2VgAJhQZ5KFoOqAv89RFEu09+6edPmp+MFjT3R3w=
+github.com/sean-der/fail2go v0.0.1 h1:AOZ5b/ewYzStnhsPXO/bLWzg97eogEV4gXkiwEJKLxU=
+github.com/sean-der/fail2go v0.0.1/go.mod h1:xfDepiRfuCxHX5LZyBl4nAIUvL+8Aed6o8fcxvCMPD4=
 github.com/sean-der/goWHOIS v0.0.0-20140709054325-70c302b526cf h1:EmuSitACP3cGjR5/KrEUiyDXPCDI6MNoPzrt4weR0Fw=
 github.com/sean-der/goWHOIS v0.0.0-20140709054325-70c302b526cf/go.mod h1:VrJMtetl51Wyuc1JaF5UhewOiLRYBN1PozQtYJp8vCY=

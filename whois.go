@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/rasyidwi/fail2go"
+	"github.com/sean-der/fail2go"
 
 	"github.com/gorilla/mux"
 	"github.com/sean-der/goWHOIS"

@@ -9,7 +9,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/rasyidwi/fail2go"
+	"github.com/sean-der/fail2go"
 
 	"github.com/gorilla/mux"
 )

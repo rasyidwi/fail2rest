@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/rasyidwi/fail2go"
+	"github.com/sean-der/fail2go"
 
 	"github.com/gorilla/mux"
 )
@@ -18,6 +18,10 @@ type Configuration struct {
 }
 
 var fail2goConn *fail2go.Conn
+
+type Conn struct {
+	Fail2banSocket string
+}
 
 func main() {
 	configPath := flag.String("config", "config.json", "path to config.json")
