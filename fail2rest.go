@@ -17,8 +17,6 @@ type Configuration struct {
 	Fail2banSocket string
 }
 
-var fail2goConn *fail2go.Conn
-
 type Conn struct {
 	Fail2banSocket string
 }

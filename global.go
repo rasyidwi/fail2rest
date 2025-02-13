@@ -2,7 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strings"
 
 	"database/sql"
 
@@ -12,14 +14,13 @@ import (
 
 	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/sean-der/fail2go"
 
 	ogórek "github.com/kisielk/og-rek"
 )
 
 const END_COMMAND = "<F2B_END_COMMAND>"
 
-func (conn *Conn) fail2banRequest(input []string) (interface{}, error) {
+func (conn *Conn) fail2banRequestMode(input []string) (interface{}, error) {
 	c, err := net.Dial("unix", conn.Fail2banSocket)
 
 	if err != nil {
@@ -68,7 +69,7 @@ func (conn *Conn) fail2banRequest(input []string) (interface{}, error) {
 }
 
 func (conn *Conn) GlobalDBFile() (string, error) {
-	output, err := conn.fail2banRequest([]string{"get", "dbfile"})
+	output, err := conn.fail2banRequestMode([]string{"get", "dbfile"})
 	if err != nil {
 		return "", err
 	}
@@ -110,11 +111,26 @@ func (conn *Conn) GlobalBans() (results []Ban, err error) {
 		results = append(results, ban)
 	}
 	rows.Close()
-
+	fmt.Println(results)
 	return results, nil
 }
 
-func globalStatusHandler(res http.ResponseWriter, req *http.Request, fail2goConn *fail2go.Conn) {
+func (conn *Conn) GlobalStatus() ([]string, error) {
+	fail2BanOutput, err := conn.fail2banRequestMode([]string{"status"})
+	if err != nil {
+		return nil, err
+	}
+
+	jails := fail2BanOutput.([]interface{})[1].(ogórek.Tuple)[1]
+	output := make([]string, 0)
+	for _, v := range strings.Split(jails.(string), ",") {
+		output = append(output, strings.TrimSpace(v))
+	}
+
+	return output, nil
+}
+
+func globalStatusHandler(res http.ResponseWriter, req *http.Request, fail2goConn Conn) {
 	globalStatus, err := fail2goConn.GlobalStatus()
 	if err != nil {
 		writeHTTPError(res, err)
@@ -125,7 +141,7 @@ func globalStatusHandler(res http.ResponseWriter, req *http.Request, fail2goConn
 	res.Write(encodedOutput)
 }
 
-func globalPingHandler(res http.ResponseWriter, req *http.Request, fail2goConn *fail2go.Conn) {
+func globalPingHandler(res http.ResponseWriter, req *http.Request, fail2goConn Conn) {
 	globalPing, err := fail2goConn.GlobalPing()
 	if err != nil {
 		writeHTTPError(res, err)
@@ -136,7 +152,7 @@ func globalPingHandler(res http.ResponseWriter, req *http.Request, fail2goConn *
 	res.Write(encodedOutput)
 }
 
-func globalBansHandler(res http.ResponseWriter, req *http.Request, fail2goConn *fail2go.Conn) {
+func globalBansHandler(res http.ResponseWriter, req *http.Request, fail2goConn Conn) {
 	globalBans, err := fail2goConn.GlobalBans()
 	if err != nil {
 		writeHTTPError(res, err)
@@ -147,7 +163,7 @@ func globalBansHandler(res http.ResponseWriter, req *http.Request, fail2goConn *
 	res.Write(encodedOutput)
 }
 
-func globalHandler(globalRouter *mux.Router, fail2goConn *fail2go.Conn) {
+func globalHandler(globalRouter *mux.Router, fail2goConn Conn) {
 	globalRouter.HandleFunc("/status", func(res http.ResponseWriter, req *http.Request) {
 		globalStatusHandler(res, req, fail2goConn)
 	}).Methods("GET")
